@@ -1,4 +1,3 @@
-<a name="CVUfP"></a>
 ## 运行服务器相关
 运行django服务器的时候，突然远程连接断掉了，django服务器突然关闭不了，下面将展示如何关闭
 
@@ -16,16 +15,13 @@
 
 ---
 
-<a name="v0yg9"></a>
 ## id:socket访问工作流程
 
 
 
 ---
 
-<a name="M2I4G"></a>
 ## ~/ACAPP/game项目文件
-<a name="G4vdk"></a>
 ### 1.static
 
 - `**static**`**文件夹下共有**`**css, js, image, audio**`四个文件夹。
@@ -49,23 +45,23 @@ find $JS_PATH_SRC -type f -name '*.js' | sort | xargs cat > ${JS_PATH_DIST}game.
 - `**html文件管理**`
 
 在`templates`文件夹下创建的`multiends`文件夹，用来存放不同终端下的`html`文件，并返回给`view`
-<a name="jhIjz"></a>
 ### 2.views
 存放各种函数，等待用户访问。
 
 - 在`views`文件夹下创建了三个模块的文件夹：`menu, playground, settings`，为了能够被`import`，我们在这三个文件夹下创建`__init__.py`文件
-<a name="HdOkf"></a>
 #### (`__init__.py`:
 
 - `__init__.py `文件的作用是将文件夹变为一个Python模块, Python 中的每个模块的包中，都有`__init__.py `文件
 - 我们在**导入一个包时，实际上是导入了它的**`**__init__.py文件**`。这样我们可以在`__init__.py`文件中批量导入我们所需要的模块，而不再需要一个一个的导入。
 
-[__init__.py详解](https://www.cnblogs.com/Lands-ljk/p/5880483.html))<br />​<br />
+[__init__.py详解](https://www.cnblogs.com/Lands-ljk/p/5880483.html))
+​
+
 
 - 为了在返回`html`文件到用户浏览器，我们需要创建一个`index.py`文件，返回`templates`中`multiends`文件夹下的`html`文件。
 
-​<br />
-<a name="e6ceJ"></a>
+
+
 ### 3.urls
 服务器端跟据`url`格式，来选择调用什么函数。
 
@@ -104,18 +100,14 @@ from game.views.index import index
    ]  
 ```
 至此，我们修改完了我们期望的**路由规则**
-<a name="NhaOV"></a>
 ### 4.medels
 存放项目数据结构，如数据库里的`table`，可以理解为各种`class`
-<a name="HSO9C"></a>
 ### 5.__pycache__文件夹
 [__pycache__文件夹详解](https://blog.csdn.net/yitiaodashu/article/details/79023987)
 
 ---
 
-<a name="j1Yo0"></a>
 ## 创建菜单`menu`界面
-<a name="hiiGY"></a>
 ### 1.搭建菜单`menu`框架
 
 - 在`~/ACAPP/game/templates/multiends/web.html`里创建一个带有**id**的**div**。给名字（id）的目的是我们以后可用`js`来控制它， 比如说移动它或改变它的一些性质等等。
@@ -165,7 +157,6 @@ $(`
          this.root.$ac_game.append(this.$menu);
          this.$single_mode = this.$menu.find('.ac_game_menu_field_item_single_mode');
 ```
-<a name="zu7He"></a>
 ### 2.添加单人模式监听函数，实现打开游戏界面功能
 
 - 点击单人模式按钮，触发`click`事件，触发执行监听函数
@@ -200,7 +191,8 @@ class AcGamePlayground {
 ```cpp
 this.playground = new AcGamePlayground(this);//实现游戏界面
 ```
-最后实现关闭`menu`界面，打开`playground`界面<br />`~/ACAPP/game/static/js/src/menu$`
+最后实现关闭`menu`界面，打开`playground`界面
+`~/ACAPP/game/static/js/src/menu$`
 ```cpp
         add_listening_events() {
                      let outer = this;                                                                                                                                    
@@ -214,6 +206,14 @@ this.playground = new AcGamePlayground(this);//实现游戏界面
                      });
                  }
 ```
-结束。<br />​
+结束。
 
-​<br />
+---
+
+### Django路由
+
+* 我们在前端访问网页的路径是由**`/urls`**提供的，我们要知道，一个文件有许多不同的模块，比如`settings`，`menu`， `playground` 等。
+* 因此`django`提供了层级路由，上层文件下的`index.py`可以调用下层目录的`index.py` 中的`path`和`include`。十分方便
+
+
+
